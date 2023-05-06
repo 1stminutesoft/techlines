@@ -1,11 +1,17 @@
-
-
+import {ChakraProvider} from '@chakra-ui/react'
+import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
+import NavBar from './components/NavBar';
 
 function App() {
   return (
-    <div>
-      <h1>Our App</h1>
-    </div>
+    <ChakraProvider>
+      <Router>
+        <NavBar/>
+        <main>
+        
+        </main>
+      </Router>
+    </ChakraProvider>
   );
 }
 
