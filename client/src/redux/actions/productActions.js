@@ -8,6 +8,7 @@ export const getProducts = () => async (dispatch) => {
     const { data } = await axios.get('/api/products');
     dispatch(setProducts(data));
   } catch (error) {
+    console.log(error.messages);
     dispatch(
       setError(
         error.response && error.response.data.message

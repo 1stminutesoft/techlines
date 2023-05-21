@@ -1,4 +1,15 @@
-import { Center, Wrap, WrapItem } from '@chakra-ui/react';
+import {
+  Center,
+  Spinner,
+  Stack,
+  Wrap,
+  WrapItem,
+  Alert,
+  AlertIcon,
+  AlertTitle,
+  AlertDescription,
+} from '@chakra-ui/react';
+
 import Productcard from '../components/Productcard';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProducts } from '../redux/actions/productActions';
@@ -13,16 +24,35 @@ const ProductsScreen = () => {
   useEffect(() => {
     dispatch(getProducts());
   }, [dispatch]);
-  
+
   return (
     <Wrap spacing='30px' justify='center' minHeight='100vh'>
-      {products.map((product) => (
-        <WrapItem key={product._id}>
-          <Center w='250px' h='550px'>
-            <Productcard product={product} />
-          </Center>
-        </WrapItem>
-      ))}
+      {loading ? (
+        <Stack direction='row' spacing={4}>
+          <Spinner
+            mt={20}
+            thickness='2px'
+            speed='0.65s'
+            emptyColor='gray.200'
+            color='orange.500'
+            size='xl'
+          />
+        </Stack>
+      ) : error ? (
+        <Alert status='error'>
+          <AlertIcon />
+          <AlertTitle>We are sorry!</AlertTitle>
+          <AlertDescription>{error}</AlertDescription>
+        </Alert>
+      ) : (
+        products.map((product) => (
+          <WrapItem key={product._id}>
+            <Center w='250px' h='550px'>
+              <Productcard product={product} />
+            </Center>
+          </WrapItem>
+        ))
+      )}
     </Wrap>
   );
 };
