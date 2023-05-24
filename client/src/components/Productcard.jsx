@@ -117,10 +117,11 @@ const Productcard = ({ product }) => {
       </Box>
 
       <Flex mt='1' justifyContent='space-between' alignContent='center'>
-        <Link as={ReactLink} to={`/product${product._id}`} pt='2' cursor='pointer'></Link>
-        <Box fontSize='2xl' fontWeight='semibold' lineHeight='tight'>
-          {product.name}
-        </Box>
+        <Link as={ReactLink} to={`/product/${product._id}`} pt='2' cursor='pointer'>
+          <Box fontSize='2xl' fontWeight='semibold' lineHeight='tight'>
+            {product.name}
+          </Box>
+        </Link>
       </Flex>
       <Flex justifyContent='space-between' alignContent='center' py='2'>
         <Rating rating={product.rating} numberOfReviews={product.numberOfReviews} />
@@ -142,7 +143,7 @@ const Productcard = ({ product }) => {
           <Button
             variant='ghost'
             display='flex'
-            disabled={product.stock <= 0}
+            isDisabled={product.stock <= 0}
             onClick={() => addItem(product._id)}
           >
             <Icon as={FiShoppingCart} h={7} w={7} alignSelf='center' />
